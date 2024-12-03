@@ -42,11 +42,13 @@ export class SignupComponent implements OnInit {
     this.http.post('http://localhost:5000/api/signup', this.signupForm.value).subscribe(
       (response) => {
         console.log('User registered successfully:', response);
+        alert('User registered successfully');
         // Redirect to login page after successful signup
         // this.route.navigate(['/login']);
       },
       (error) => {
         console.error('Error occurred while registering user:', error);
+        alert("cant register user");
       }
     );
   }

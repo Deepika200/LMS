@@ -27,42 +27,36 @@ const signup = (req, res) => {
 };
 
 
-// const bcrypt = require('bcryptjs');
+const login = (req, res) => {
+    const { username, password } = req.body;
+    console.log('Request body:', req.body); // Log the request body
 
-// Login function
-// const login = (req, res) => {
-//     const { username, password } = req.body;
-//     console.log('Request body:', req.body);  // Log the request body
+    // Query to find user by username
+    const query = 'SELECT * FROM users WHERE username = ?';
+    db.query(query, [username], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error fetching user' });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
-//     // Query to find user by username
-//     const query = 'SELECT * FROM users WHERE username = ?';
-//     db.query(query, [username], (err, result) => {
-//         if (err) {
-//             return res.status(500).json({ error: 'Error fetching user' });
-//         }
-//         if (result.length === 0) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
+        // Compare hashed password with the stored password
+        bcrypt.compare(password, result[0].password, (err, isMatch) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error comparing password' });
+            }
+            if (!isMatch) {
+                return res.status(401).json({ error: 'Invalid credentials' });
+            }
 
-//         // Compare hashed password with the stored password
-//         bcrypt.compare(password, result[0].password, (err, isMatch) => {
-//             if (err) {
-//                 return res.status(500).json({ error: 'Error comparing password' });
-//             }
-//             if (!isMatch) {
-//                 return res.status(401).json({ error: 'Invalid credentials' });
-//             }
-
-//             // Successfully logged in
-//             res.status(200).json({
-//                 message: 'Login successful',
-//                 userId: result[0].id,
-//                 username: result[0].username
-//             });
-//         });
-//     });
-// };
-
-// module.exports = { signup, login };
-
-module.exports = { signup };
+            // Successfully logged in
+            res.status(200).json({
+                message: 'Login successful',
+                userId: result[0].id,
+                username: result[0].username
+            });
+        });
+    });
+};
+module.exports = { signup, login };

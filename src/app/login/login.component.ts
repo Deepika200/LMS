@@ -1,37 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+// import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class LoginComponent {
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(private apiService: ApiService,private router:Router) {}
 
-  ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  onLogin(): void {
+  onLogin() {
     if (this.loginForm.valid) {
-      const loginData = this.loginForm.value;
-
-      // Send login request to backend
-      this.http.post('http://localhost:5000/api/login', loginData).subscribe(
-        (response: any) => {
-          alert(response.message);  // Login success message
-          this.router.navigate(['/student-details']);  // Navigate to student details
+      const { username, password } = this.loginForm.value;
+      this.apiService.login({ username, password }).subscribe(
+        (response) => {
+          console.log('Login successful', response);
+          this.router.navigate(['/student-details'])
+          // Navigate to the dashboard or handle success
         },
         (error) => {
-          alert(error.error.message);  // Login error message
+          console.error('Login failed', error);
+          // Show an error message
         }
       );
     }
