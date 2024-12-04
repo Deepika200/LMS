@@ -25,6 +25,12 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/students/${userid}`);
   }
 
+  getCourses(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/courses`);
+  }
 
+  getCourseById(courseId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/courses/${courseId}`);
+  }
 
 }

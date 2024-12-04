@@ -32,4 +32,14 @@ export class StudentDetailsComponent implements OnInit {
       }
     );
   }
+
+  getCourseName(courseId: number): string {
+    const courseNames = {
+      1: 'Computer Science',
+      2: 'Information Technology',
+      3: 'Electrical Engineering',
+      4: 'Electronics and Communication',
+    };
+    return courseNames[courseId] || 'Unknown Course'; // Return the course name based on courseId
+  }
 }

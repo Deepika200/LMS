@@ -1,1 +1,8 @@
-<p>course-details works!</p>
+<div *ngIf="course">
+  <h2>{{ course.coursename }}</h2>
+  <p>{{ course.description }}</p>
+</div>
+
+<div *ngIf="!course">
+  <p>Loading course details...</p>
+</div>

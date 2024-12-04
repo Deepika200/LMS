@@ -1,23 +1,24 @@
 <!-- student-details.component.html -->
 <div class="student-details-container" *ngIf="student">
-    <div class="student-header">
-      <h2>{{ student.name }}</h2>
-      <p>Semester: {{ student.semester }}</p>
-      <p>Roll Number: {{ student.rollno }}</p>
-      <p>Stream: {{ student.stream }}</p>
-    </div>
-  
-    <div class="student-body">
-      <img [src]="student.imageurl" alt="Student Image" class="student-image" />
-      <div class="student-info">
-        <p>Course ID: {{ student.courseid }}</p>
-        <p>Student ID: {{ student.userid }}</p>
-      </div>
+  <div class="student-header">
+    <h2>{{ student.name }}</h2>
+    <p>Semester: {{ student.semester }}</p>
+    <p>Roll Number: {{ student.rollno }}</p>
+    <p>Stream: {{ student.stream }}</p>
+  </div>
+
+  <div class="student-body">
+    <img [src]="student.imageurl" alt="Student Image" class="student-image" />
+    <div class="student-info">
+      <p>Course: 
+        <a [routerLink]="['/course-details', student.courseid]">{{ getCourseName(student.courseid) }}</a>
+      </p>
+      <p>Student ID: {{ student.userid }}</p>
     </div>
   </div>
-  
-  <!-- Loading Message -->
-  <div *ngIf="!student" class="loading-message">
-    <p>Loading student data...</p>
-  </div>
-  
+</div>
+
+<!-- Loading Message -->
+<div *ngIf="!student" class="loading-message">
+  <p>Loading student data...</p>
+</div>
