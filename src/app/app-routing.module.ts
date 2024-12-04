@@ -6,7 +6,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { CourseDetailsComponent } from './course-details/course-details.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'signup', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     // {path:'student-details',component:StudentDetailsComponent},

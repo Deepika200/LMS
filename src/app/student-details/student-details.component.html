@@ -1,6 +1,8 @@
 <!-- student-details.component.html -->
 <div class="student-details-container" *ngIf="student">
   <div class="student-header">
+    <img src="https://tinyurl.com/5def949c" alt="Student Image" class="student-image" />
+
     <h2>{{ student.name }}</h2>
     <p>Semester: {{ student.semester }}</p>
     <p>Roll Number: {{ student.rollno }}</p>
@@ -8,7 +10,6 @@
   </div>
 
   <div class="student-body">
-    <img [src]="student.imageurl" alt="Student Image" class="student-image" />
     <div class="student-info">
       <p>Course: 
         <a [routerLink]="['/course-details', student.courseid]">{{ getCourseName(student.courseid) }}</a>
