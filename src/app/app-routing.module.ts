@@ -9,7 +9,8 @@ const routes: Routes = [
     { path: '', redirectTo: 'signup', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'student-details', component: StudentDetailsComponent },
+    // {path:'student-details',component:StudentDetailsComponent},
+    { path: 'student-details/:userId', component: StudentDetailsComponent },
     { path: 'course-details', component: CourseDetailsComponent },
 ];
 

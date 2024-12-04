@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { ActivatedRoute } from '@angular/router';  // Import ActivatedRoute to get the route params
 
 @Component({
   selector: 'app-student-details',
@@ -8,12 +9,20 @@ import { ApiService } from '../api.service';
 })
 export class StudentDetailsComponent implements OnInit {
   student: any = null;
-  constructor(private apiService: ApiService) {}
+  userId: number;
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const userId = 12;  // Replace with dynamic value (e.g., from login response or route param)
+    // Get the userId from the route parameters
+    this.route.paramMap.subscribe(params => {
+      this.userId = +params.get('userId')!;  // Convert string to number
+      this.fetchStudentData();
+    });
+  }
 
-    this.apiService.getStudentByUserId(userId).subscribe(
+  fetchStudentData() {
+    this.apiService.getStudentByUserId(this.userId).subscribe(
       (data) => {
         this.student = data;
         console.log('Student details:', this.student);

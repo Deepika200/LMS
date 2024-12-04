@@ -23,7 +23,9 @@ export class LoginComponent {
       this.apiService.login({ username, password }).subscribe(
         (response) => {
           console.log('Login successful', response);
-          this.router.navigate(['/student-details'])
+          const userId = response.userId; // Adjust according to your actual response structure
+
+          this.router.navigate(['/student-details',userId])
           // Navigate to the dashboard or handle success
         },
         (error) => {
