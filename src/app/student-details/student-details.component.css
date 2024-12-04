@@ -1,0 +1,50 @@
+/* student-details.component.css */
+.student-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .student-header {
+    margin-bottom: 20px;
+  }
+  
+  .student-header h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .student-header p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .student-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .student-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+  
+  .student-info {
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .loading-message {
+    font-size: 1.2rem;
+    color: #888;
+    text-align: center;
+  }
+  

@@ -19,4 +19,12 @@ export class ApiService {
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
+
+
+  getStudentByUserId(userid: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/students/${userid}`);
+  }
+
+
+
 }

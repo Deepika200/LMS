@@ -4,12 +4,15 @@ const app = express();
 const authRouter = require('./routes/authRoutes'); // Assuming auth-router is in routes folder
 const cors = require('cors');
 app.use(cors());  // Enable CORS
+const studentRoutes = require('./routes/studentRoutes');
+
 
 // Middleware to parse JSON requests
 app.use(bodyParser.json());
 
 // Use authRouter for authentication-related routes
 app.use('/api', authRouter);
+app.use('/api', studentRoutes);
 
 // Starting the server
 const PORT = process.env.PORT || 5000;
